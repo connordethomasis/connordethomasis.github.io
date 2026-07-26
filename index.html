@@ -1,59 +1,184 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html lang="en"> <![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Connor De Thomasis</title>
-        <meta name="description" content="">
+        <title>Connor De Thomasis — Cyber Security &amp; AI</title>
+        <meta name="description" content="Personal portfolio of Connor De Thomasis, an Information Technology student at QUT majoring in Cyber Security with a second major in Artificial Intelligence.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Typeface -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
         <!-- Styling -->
         <link rel="stylesheet" href="style.css">
         <!-- Icon Container -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
-    
+
     <body>
 
-        <!-- Navigation Bar -->
-        
-        <nav class="navbar">
-            <div class="nav-left">
-                <div class="logo">Connor De Thomasis</div>
+        <a class="skip-link" href="#main">Skip to main content</a>
 
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                </ul>
-            </div>
-            <div class="social-icons">
-                <a href="https://github.com/connordethomasis" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <!-- Navigation Bar -->
+
+        <nav class="navbar" aria-label="Primary">
+            <div class="nav-inner">
+                <div class="nav-left">
+                    <div class="logo">Connor De Thomasis</div>
+
+                    <ul class="nav-links">
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="social-icons">
+                    <a href="https://github.com/connordethomasis" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)"><i class="fab fa-github" aria-hidden="true"></i></a>
+                    <a href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in a new tab)"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                </div>
             </div>
         </nav>
 
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <main class="text-container">
 
-        <section id="about">
-            <h1>Connor De Thomasis</h1>
-            <h2>Cyber Security & AI Major</h2>
-            <p>
-                Hi! I'm Connor De Thomasis and I'm a second-year student at QUT studying a Bachelor of Information Technology 
-                majoring in Cyber Security and second majoring in Artificial Intelligence.<br>
-                This website serves the role of a personal portfolio to demonstrate 
-                my skills and capabilities as an aspiring AI security Researcher.<br>
-                <br>
-                <strong>Website is a work in progress...</strong>
-            </p>
+        <main class="page" id="main" tabindex="-1">
+
+        <section id="about" class="hero" aria-labelledby="about-heading">
+
+            <div class="hero-portrait">
+                <img class="portrait" src="Images/pfp.jpg" width="600" height="600"
+                     alt="Connor De Thomasis">
+            </div>
+
+            <div class="hero-text">
+                <h1 id="about-heading">Connor De Thomasis</h1>
+                <p class="tagline">Cyber Security &amp; Artificial Intelligence</p>
+                <p class="lede">
+                    Hi, I'm a second-year Information Technology student at Queensland University of
+                    Technology, majoring in Cyber Security with a second major in Artificial
+                    Intelligence. I'm especially interested in applying AI to protect systems and
+                    data, and in the security of AI systems themselves.
+                </p>
+                <p class="lede">
+                    I'm currently looking for an internship position to apply theory to real-world 
+                    practice and develop upon my IT expetise while completing my degree.
+                </p>
+                <p class="email">
+                    <a href="mailto:connor.dethomasis@outlook.com">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <span>connor.dethomasis@outlook.com</span>
+                    </a>
+                </p>
+            </div>
+
+        </section>
+
+        <section class="section" aria-labelledby="education-heading">
+            <h2 id="education-heading">Education</h2>
+
+            <div class="section-body">
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>Bachelor of Information Technology</h3>
+                        <p class="entry-date">Feb 2025 – Present</p>
+                    </div>
+                    <p class="entry-org">Queensland University of Technology, Gardens Point</p>
+                    <ul>
+                        <li>Major in Cyber Security, second major in Artificial Intelligence.</li>
+                        <li>Expected graduation: December 2027.</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>Secondary Graduation Certificate</h3>
+                        <p class="entry-date">Graduated Nov 2024</p>
+                    </div>
+                    <p class="entry-org">Holy Spirit College, Mackay (Mount Pleasant)</p>
+                    <ul>
+                        <li>Awarded Year 12 Academic Excellence.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Technical Skills</h2>
+
+            <div class="section-body">
+                <dl class="skills">
+                    <div class="skill">
+                        <dt>Security</dt>
+                        <dd>GRC, Secure Software Development, Network Fundamentals</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Programming</dt>
+                        <dd>Python, SQL, C#, Object-Oriented Programming, Git (GitHub)</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Systems &amp; Support</dt>
+                        <dd>Linux &amp; Windows, Command Line Interface (CLI), Troubleshooting</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Data &amp; AI</dt>
+                        <dd>Data Analysis, Artificial Intelligence &amp; Machine Learning, Microsoft Azure</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Problem-Solving</dt>
+                        <dd>Critical Thinking, Adaptability, Efficiency</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Communication</dt>
+                        <dd>Professional Communication, Collaboration, Teamwork</dd>
+                    </div>
+                </dl>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Experience</h2>
+
+            <div class="section-body">
+                <article class="entry">
+                    <div class="entry-head">
+                        <h3>Crew Member</h3>
+                        <p class="entry-date">Mar 2022 – Jan 2025</p>
+                    </div>
+                    <p class="entry-org">McDonald's, North Mackay</p>
+                    <ul>
+                        <li>Back of house: food safety procedures, full food preparation process, high cleaning standards.</li>
+                        <li>Trained and supported new crew members during onboarding.</li>
+                        <li>Provided front-line customer service throughout high-volume periods.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="certifications-heading">
+            <h2 id="certifications-heading">Certifications</h2>
+
+            <div class="section-body">
+                <ul class="plain-list">
+                    <li>CompTIA Security+ (plus) currently in progress.</li>
+                </ul>
+            </div>
         </section>
 
         </main>
-        
-        
+
+        <footer class="site-footer">
+            <p>
+                Connor De Thomasis
+                <span aria-hidden="true">·</span>
+                <a href="mailto:connor.dethomasis@outlook.com">connor.dethomasis@outlook.com</a>
+            </p>
+        </footer>
+
+        <script src="script.js" defer></script>
+
     </body>
 </html>
