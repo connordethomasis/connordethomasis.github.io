@@ -1,18 +1,26 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html lang="en"> <![endif]-->
+<html lang="en">
+
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Connor De Thomasis — Cyber Security &amp; AI</title>
         <meta name="description" content="Personal portfolio of Connor De Thomasis, an Information Technology student at QUT majoring in Cyber Security with a second major in Artificial Intelligence.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#17191d">
+
+        <!-- Social preview -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Connor De Thomasis — Cyber Security &amp; AI">
+        <meta property="og:description" content="Cyber Security &amp; AI student at QUT working across security risk assessment, incident response planning, detection engineering and AI guardrail design.">
+        <meta property="og:url" content="https://connordethomasis.github.io">
+
+        <!-- Inline mark, avoids a favicon request -->
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2317191d'/><text x='32' y='44' font-family='Manrope,Arial,sans-serif' font-size='34' font-weight='700' fill='%23ccb844' text-anchor='middle'>C</text></svg>">
+
         <!-- Typeface -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
         <!-- Styling -->
         <link rel="stylesheet" href="style.css">
         <!-- Icon Container -->
@@ -27,156 +35,485 @@
 
         <nav class="navbar" aria-label="Primary">
             <div class="nav-inner">
-                <div class="nav-left">
-                    <div class="logo">Connor De Thomasis</div>
+                <a class="logo" href="#about">
+                    <span class="logo-mark" aria-hidden="true">C</span>
+                    <span class="logo-name">Connor De Thomasis</span>
+                </a>
 
+                <button class="nav-toggle" type="button" id="nav-toggle" aria-controls="nav-menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    <span class="visually-hidden">Menu</span>
+                </button>
+
+                <div class="nav-menu" id="nav-menu">
                     <ul class="nav-links">
                         <li><a href="#about">About</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
                         <li><a href="#skills">Skills</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact</a></li>
                     </ul>
-                </div>
-                <div class="social-icons">
-                    <a href="https://github.com/connordethomasis" target="_blank" rel="noopener" aria-label="GitHub profile (opens in a new tab)"><i class="fab fa-github" aria-hidden="true"></i></a>
-                    <a href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" rel="noopener" aria-label="LinkedIn profile (opens in a new tab)"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+
+                    <div class="nav-actions">
+                        <a class="nav-icon nav-icon-resume" href="assets/connor-de-thomasis-resume.pdf" download
+                           title="Download résumé (PDF)" aria-label="Download résumé (PDF)">
+                            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                        </a>
+                        <a class="nav-icon" href="https://github.com/connordethomasis" target="_blank" rel="noopener"
+                           title="GitHub" aria-label="GitHub profile (opens in a new tab)">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a class="nav-icon" href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" rel="noopener"
+                           title="LinkedIn" aria-label="LinkedIn profile (opens in a new tab)">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>
 
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-
         <main class="page" id="main" tabindex="-1">
 
+            <!-- About -->
+
             <section id="about" class="hero" aria-labelledby="about-heading">
-            
+
                 <div class="hero-portrait">
-                    <img class="portrait" src="img/pfp.png" width="600" height="600"
+                    <img class="portrait" src="assets/pfp.jpg" width="600" height="600"
                          alt="Connor De Thomasis">
                 </div>
-            
+
                 <div class="hero-text">
+                    <p class="availability">
+                        <span class="pulse" aria-hidden="true"></span>
+                        Open to internship opportunities
+                    </p>
+
                     <h1 id="about-heading">Connor De Thomasis</h1>
-                    <p class="tagline">Cyber Security &amp; Artificial Intelligence</p>
+                    <p class="tagline">Cyber Security &amp; AI Analyst</p>
+                    <p class="subtagline">Security &amp; GRC <span aria-hidden="true">·</span> Blue Team <span aria-hidden="true">·</span> AI Guardrails</p>
+
                     <p class="lede">
-                        Hi, I'm a second-year Information Technology student at Queensland University of
+                        I'm a second-year Information Technology student at Queensland University of
                         Technology, majoring in Cyber Security with a second major in Artificial
-                        Intelligence. I'm especially interested in applying AI to protect systems and
-                        data, and in the security of AI systems themselves.
+                        Intelligence. My project experience spans security risk assessment, incident
+                        response planning, detection engineering and the design of AI guardrails.
                     </p>
                     <p class="lede">
-                        I'm currently looking for an internship position to apply theory to real-world 
-                        practice and develop upon my IT expetise while completing my degree.
+                        I take pride in my work and keep improving through extra research and homelabbing.
+                        I've translated technical findings into costed, prioritised recommendations for
+                        non-technical stakeholders, and I work reliably under pressure with close attention
+                        to detail.
                     </p>
-                    <p class="email">
-                        <a href="mailto:connor.dethomasis@outlook.com">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                            <span>connor.dethomasis@outlook.com</span>
+
+                    <ul class="hero-facts">
+                        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Brisbane, QLD</li>
+                        <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> QUT — graduating Dec 2027</li>
+                        <li><i class="fa-solid fa-certificate" aria-hidden="true"></i> CompTIA Security+ in progress</li>
+                    </ul>
+
+                    <div class="hero-actions">
+                        <p class="email">
+                            <a href="mailto:connor.dethomasis@outlook.com">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>connor.dethomasis@outlook.com</span>
+                            </a>
+                        </p>
+                        <a class="btn btn-ghost" href="assets/connor-de-thomasis-resume.pdf" download>
+                            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                            <span>Download résumé</span>
                         </a>
-                    </p>
+                    </div>
                 </div>
-            
+
             </section>
-        
-            <section class="section" aria-labelledby="education-heading">
-                <h2 id="education-heading">Education</h2>
-            
-                <div class="section-body">
-                    <article class="entry">
-                        <div class="entry-head">
-                            <h3>Bachelor of Information Technology</h3>
-                            <p class="entry-date">Feb 2025 – Present</p>
+
+            <!-- Education & Certifications -->
+
+            <section id="education" class="section" aria-labelledby="education-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">01</span>
+                    <h2 id="education-heading">Education &amp; Certifications</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="grid grid-2">
+                    <article class="card">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></span>
+                            <p class="meta">Feb 2025 – Present</p>
                         </div>
-                        <p class="entry-org">Queensland University of Technology, Gardens Point</p>
-                        <ul>
+                        <h3>Bachelor of Information Technology</h3>
+                        <p class="card-org">Queensland University of Technology, Gardens Point</p>
+                        <ul class="bullets">
                             <li>Major in Cyber Security, second major in Artificial Intelligence.</li>
                             <li>Expected graduation: December 2027.</li>
                         </ul>
                     </article>
-                
-                    <article class="entry">
-                        <div class="entry-head">
-                            <h3>Secondary Graduation Certificate</h3>
-                            <p class="entry-date">Graduated Nov 2024</p>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-school"></i></span>
+                            <p class="meta">Graduated Nov 2024</p>
                         </div>
-                        <p class="entry-org">Holy Spirit College, Mackay (Mount Pleasant)</p>
-                        <ul>
+                        <h3>Secondary Graduation Certificate</h3>
+                        <p class="card-org">Holy Spirit College, Mackay (Mount Pleasant)</p>
+                        <ul class="bullets">
                             <li>Awarded Year 12 Academic Excellence.</li>
                         </ul>
                     </article>
-                </div>
-            </section>
-        
-            <section id="skills" class="section" aria-labelledby="skills-heading">
-                <h2 id="skills-heading">Technical Skills</h2>
-            
-                <div class="section-body">
-                    <dl class="skills">
-                        <div class="skill">
-                            <dt>Security</dt>
-                            <dd>GRC, Secure Software Development, Network Fundamentals</dd>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></span>
+                            <p class="status status-wip"><span class="dot" aria-hidden="true"></span>In progress</p>
                         </div>
-                        <div class="skill">
-                            <dt>Programming</dt>
-                            <dd>Python, SQL, C#, Object-Oriented Programming, Git (GitHub)</dd>
+                        <h3>CompTIA Security+</h3>
+                        <p class="card-org">Certification</p>
+                        <ul class="bullets">
+                            <li>Studying alongside coursework to formalise foundational security knowledge.</li>
+                        </ul>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-id-card"></i></span>
+                            <p class="status status-done"><span class="dot" aria-hidden="true"></span>Current</p>
                         </div>
-                        <div class="skill">
-                            <dt>Systems &amp; Support</dt>
-                            <dd>Linux &amp; Windows, Command Line Interface (CLI), Troubleshooting</dd>
-                        </div>
-                        <div class="skill">
-                            <dt>Data &amp; AI</dt>
-                            <dd>Data Analysis, Artificial Intelligence &amp; Machine Learning, Microsoft Azure</dd>
-                        </div>
-                        <div class="skill">
-                            <dt>Problem-Solving</dt>
-                            <dd>Critical Thinking, Adaptability, Efficiency</dd>
-                        </div>
-                        <div class="skill">
-                            <dt>Communication</dt>
-                            <dd>Professional Communication, Collaboration, Teamwork</dd>
-                        </div>
-                    </dl>
-                </div>
-            </section>
-        
-            <section class="section" aria-labelledby="experience-heading">
-                <h2 id="experience-heading">Experience</h2>
-            
-                <div class="section-body">
-                    <article class="entry">
-                        <div class="entry-head">
-                            <h3>Crew Member</h3>
-                            <p class="entry-date">Mar 2022 – Jan 2025</p>
-                        </div>
-                        <p class="entry-org">McDonald's, North Mackay</p>
-                        <ul>
-                            <li>Back of house: food safety procedures, full food preparation process, high cleaning standards.</li>
-                            <li>Trained and supported new crew members during onboarding.</li>
-                            <li>Provided front-line customer service throughout high-volume periods.</li>
+                        <h3>P2 Provisional Driver's Licence</h3>
+                        <p class="card-org">Licence — Manual</p>
+                        <ul class="bullets">
+                            <li>Able to travel to on-site and hybrid placements.</li>
                         </ul>
                     </article>
                 </div>
             </section>
-        
-            <section class="section" aria-labelledby="certifications-heading">
-                <h2 id="certifications-heading">Certifications</h2>
-            
-                <div class="section-body">
-                    <ul class="plain-list">
-                        <li>CompTIA Security+ (plus) currently in progress.</li>
-                    </ul>
+
+            <!-- Professional Experience -->
+
+            <section id="experience" class="section" aria-labelledby="experience-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">02</span>
+                    <h2 id="experience-heading">Professional Experience</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="grid grid-1">
+                    <article class="card">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-briefcase"></i></span>
+                            <p class="meta">Mar 2022 – Jan 2025</p>
+                        </div>
+                        <h3>Crew Member</h3>
+                        <p class="card-org">McDonald's, North Mackay</p>
+                        <ul class="bullets">
+                            <li>Trained and supported new crew members through onboarding, reinforcing food safety
+                                procedures and cleaning standards across the full back-of-house preparation process.</li>
+                            <li>Delivered front-line customer service throughout sustained high-volume periods,
+                                maintaining accuracy and composure under time pressure.</li>
+                            <li>Applied strict food safety and compliance procedures consistently across shifts in a
+                                fast-paced operating environment.</li>
+                        </ul>
+                    </article>
                 </div>
             </section>
-        
+
+            <!-- Skills -->
+
+            <section id="skills" class="section" aria-labelledby="skills-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">03</span>
+                    <h2 id="skills-heading">Skills</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="grid grid-3">
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></span>
+                        <h3>Security &amp; GRC</h3>
+                        <ul class="chips">
+                            <li>Security risk assessment</li>
+                            <li>Control effectiveness review</li>
+                            <li>Risk treatment &amp; costing</li>
+                            <li>Business impact analysis</li>
+                            <li>Incident response planning</li>
+                            <li>NIST SP 800-61</li>
+                            <li>Privacy Act 1988 &amp; NDB scheme</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-tower-broadcast"></i></span>
+                        <h3>Detection &amp; Infrastructure</h3>
+                        <ul class="chips">
+                            <li>Wazuh SIEM</li>
+                            <li>MITRE ATT&amp;CK</li>
+                            <li>Detection rule authoring &amp; tuning</li>
+                            <li>Windows Active Directory</li>
+                            <li>pfSense</li>
+                            <li>Network segmentation</li>
+                            <li>Proxmox VE</li>
+                            <li>Kali Linux</li>
+                            <li>ZFS</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-robot"></i></span>
+                        <h3>AI Security</h3>
+                        <ul class="chips">
+                            <li>LLM guardrail design</li>
+                            <li>Prompt injection &amp; jailbreak defence</li>
+                            <li>Embedding-based classification</li>
+                            <li>LLM-as-a-Judge</li>
+                            <li>Adversarial testing</li>
+                            <li>Azure OpenAI</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+                        <h3>Programming &amp; Data</h3>
+                        <ul class="chips">
+                            <li>Python</li>
+                            <li>SQL</li>
+                            <li>C#</li>
+                            <li>Object-oriented programming</li>
+                            <li>Git (GitHub)</li>
+                            <li>Data analysis</li>
+                            <li>AI &amp; machine learning</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-server"></i></span>
+                        <h3>Systems &amp; Support</h3>
+                        <ul class="chips">
+                            <li>Linux &amp; Windows</li>
+                            <li>Command line interface (CLI)</li>
+                            <li>Microsoft Azure</li>
+                            <li>Structured logging &amp; audit trails</li>
+                            <li>Troubleshooting</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-skill">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></span>
+                        <h3>Professional</h3>
+                        <ul class="chips">
+                            <li>Critical thinking</li>
+                            <li>Adaptability</li>
+                            <li>Professional communication</li>
+                            <li>Collaboration &amp; teamwork</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Projects -->
+
+            <section id="projects" class="section" aria-labelledby="projects-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">04</span>
+                    <h2 id="projects-heading">Projects</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="grid grid-1">
+
+                    <article class="card card-project is-featured">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-clipboard-check"></i></span>
+                            <p class="status status-done"><span class="dot" aria-hidden="true"></span>Completed</p>
+                        </div>
+
+                        <h3>Information Security Risk Assessment &amp; Incident Response Planning</h3>
+                        <p class="meta">QUT University Project <span aria-hidden="true">•</span> March – May 2026</p>
+
+                        <p class="project-summary">
+                            A two-part governance, risk and compliance engagement for a simulated 10-property
+                            hospitality group: a full information security risk assessment, followed by a business
+                            impact analysis and NIST-aligned incident response plan.
+                        </p>
+
+                        <div class="project-parts">
+                            <div class="project-part">
+                                <h4>Information Security Risk Assessment — Hospitality Group</h4>
+                                <ul class="bullets">
+                                    <li>Owned network infrastructure as one of six assessed assets, identifying a flat
+                                        network architecture as a Critical inherent risk (20) for organisation-wide
+                                        ransomware propagation and scoring it against a semi-quantitative 5×5 likelihood
+                                        and impact matrix.</li>
+                                    <li>Reviewed existing segmentation, client isolation and offsite backup controls to
+                                        justify a reduced residual rating.</li>
+                                    <li>Costed and recommended endpoint detection and response and multi-factor
+                                        authentication rollouts across 1,100 devices for selection into a
+                                        budget-constrained year-one treatment plan.</li>
+                                </ul>
+                            </div>
+
+                            <div class="project-part">
+                                <h4>Business Impact Analysis &amp; Incident Response Plan</h4>
+                                <ul class="bullets">
+                                    <li>Completed the business impact analysis for the EDR and SIEM platform,
+                                        quantifying financial, operational and reputational impact and mapping cloud and
+                                        network dependencies.</li>
+                                    <li>Identified single points of failure to justify a Priority 1 recovery ranking.</li>
+                                    <li>Contributed to a NIST SP 800-61 aligned incident response plan defining SEV 1–3
+                                        severity classification and response times, incident response team roles and
+                                        pre-authorised actions, and OAIC notifiable data breach escalation triggers.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <ul class="chips chips-tech">
+                            <li>Risk assessment</li>
+                            <li>5×5 risk matrix</li>
+                            <li>Control effectiveness review</li>
+                            <li>Risk treatment &amp; costing</li>
+                            <li>Business impact analysis</li>
+                            <li>NIST SP 800-61</li>
+                            <li>OAIC NDB scheme</li>
+                        </ul>
+                    </article>
+
+                    <article class="card card-project">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-comment-dots"></i></span>
+                            <p class="status status-done"><span class="dot" aria-hidden="true"></span>Completed</p>
+                        </div>
+
+                        <h3>Secure Topic-Constrained AI Chatbot with Layered Guardrails</h3>
+                        <p class="meta">QUT University Project <span aria-hidden="true">•</span> May 2026</p>
+
+                        <p class="project-summary">
+                            A multi-turn chatbot in Python on Azure OpenAI (GPT-4.1-mini, text-embedding-ada-002)
+                            that wraps every turn in a six-layer guardrail pipeline.
+                        </p>
+
+                        <ul class="bullets">
+                            <li>Layered a token cap, a normalised keyword denylist, embedding similarity against 26
+                                jailbreak archetypes, topic-anchor similarity, and an LLM-as-a-Judge on both input and
+                                output.</li>
+                            <li>Judge verdicts deny rather than pass through: users receive a generic refusal while the
+                                triggering layer, category and similarity scores are written to a rotating JSON audit
+                                log, denying attackers the feedback needed to tune bypasses.</li>
+                            <li>Tested against prompt-injection, persona-escape, system-prompt-extraction and
+                                obfuscation attacks with no successful bypasses across 50+ logged decisions.</li>
+                        </ul>
+
+                        <ul class="chips chips-tech">
+                            <li>Python</li>
+                            <li>Azure OpenAI</li>
+                            <li>GPT-4.1-mini</li>
+                            <li>Embeddings</li>
+                            <li>LLM-as-a-Judge</li>
+                            <li>Prompt injection defence</li>
+                            <li>Audit logging</li>
+                        </ul>
+
+                        <p class="card-links">
+                            <a class="btn btn-ghost" href="https://github.com/connordethomasis/secure-chatbot"
+                               target="_blank" rel="noopener">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>View repository</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square link-out" aria-hidden="true"></i>
+                                <span class="visually-hidden">(opens in a new tab)</span>
+                            </a>
+                        </p>
+                    </article>
+
+                    <article class="card card-project">
+                        <div class="card-top">
+                            <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass-chart"></i></span>
+                            <p class="status status-wip"><span class="dot" aria-hidden="true"></span>In progress</p>
+                        </div>
+
+                        <h3>Detection Engineering Homelab</h3>
+                        <p class="meta">Personal Project <span aria-hidden="true">•</span> July 2026 – Present</p>
+
+                        <p class="project-summary">
+                            A detection engineering lab built from scratch on Proxmox VE. Segmented environment with a
+                            Windows Active Directory domain, Wazuh single-node SIEM, and deliberately vulnerable
+                            targets, with pfSense enforcing isolation between lab and host networks. Attack activity is
+                            emulated from a Kali VM and mapped to MITRE ATT&amp;CK, driving custom detection rules and
+                            tuning against real telemetry. Backed by ZFS mirrored storage and UPS-managed graceful
+                            shutdown.
+                        </p>
+
+                        <ul class="chips chips-tech">
+                            <li>Proxmox VE</li>
+                            <li>Windows Active Directory</li>
+                            <li>Wazuh SIEM</li>
+                            <li>pfSense</li>
+                            <li>Kali Linux</li>
+                            <li>MITRE ATT&amp;CK</li>
+                            <li>ZFS</li>
+                        </ul>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- Contact -->
+
+            <section id="contact" class="section" aria-labelledby="contact-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">05</span>
+                    <h2 id="contact-heading">Contact</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="card card-contact">
+                    <div class="contact-text">
+                        <h3>Let's get in touch</h3>
+                        <p>
+                            I'm looking for a cyber security / AI internship where I can apply academic theory to
+                            real-world practice. The quickest way to reach me is by email — I'm happy to talk about
+                            roles, projects or anything on this page.
+                        </p>
+                        <p class="contact-email">
+                            <a href="mailto:connor.dethomasis@outlook.com">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                <span>connor.dethomasis@outlook.com</span>
+                            </a>
+                        </p>
+                        <p class="meta"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Brisbane, QLD 4000, Australia</p>
+                    </div>
+
+                    <div class="contact-actions">
+                        <a class="btn" href="mailto:connor.dethomasis@outlook.com">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <span>Email</span>
+                        </a>
+                        <a class="btn btn-ghost" href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" rel="noopener">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            <span>LinkedIn</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square link-out" aria-hidden="true"></i>
+                            <span class="visually-hidden">(opens in a new tab)</span>
+                        </a>
+                        <a class="btn btn-ghost" href="https://github.com/connordethomasis" target="_blank" rel="noopener">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                            <span>GitHub</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square link-out" aria-hidden="true"></i>
+                            <span class="visually-hidden">(opens in a new tab)</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer class="site-footer">
-            <p>
-                Connor De Thomasis
-                <span aria-hidden="true">·</span>
-                <a href="mailto:connor.dethomasis@outlook.com">connor.dethomasis@outlook.com</a>
-            </p>
+            <div class="footer-inner">
+                <p>
+                    Connor De Thomasis
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:connor.dethomasis@outlook.com">connor.dethomasis@outlook.com</a>
+                </p>
+                <p class="footer-note">Built and maintained — HTML, CSS and JavaScript.</p>
+            </div>
         </footer>
 
         <script src="script.js" defer></script>
