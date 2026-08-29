@@ -517,7 +517,8 @@ h1 {
 }
 
 .email a,
-.contact-email a {
+.contact-email a,
+.back-link a {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
@@ -532,13 +533,15 @@ h1 {
 }
 
 .email a span,
-.contact-email a span {
+.contact-email a span,
+.back-link a span {
   text-decoration: underline;
   text-underline-offset: 0.16em;
 }
 
 .email a:hover span,
-.contact-email a:hover span {
+.contact-email a:hover span,
+.back-link a:hover span {
   text-decoration-thickness: 2px;
 }
 
@@ -560,6 +563,12 @@ h1 {
   font-weight: 600;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* <button> needs what an <a> inherits for free */
+button.btn {
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .btn:hover {
@@ -642,7 +651,8 @@ h1 {
   font-size: 1.05rem;
 }
 
-h3 {
+h3,
+.sys-title {
   font-size: 1.125rem;
   font-weight: 700;
   line-height: 1.35;
@@ -705,7 +715,7 @@ h4 {
   white-space: nowrap;
 }
 
-.status .dot {
+.dot {
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
@@ -747,7 +757,8 @@ h4 {
   list-style: none;
 }
 
-.chips li {
+.chips li,
+.lab-badge {
   padding: 0.25rem 0.65rem;
   border: 1px solid var(--rule);
   border-radius: 999px;
@@ -807,7 +818,8 @@ h4 {
   margin-top: 1.4rem;
 }
 
-.project-part {
+.project-part,
+.note {
   padding: 1.15rem 1.25rem;
   border: 1px solid var(--rule);
   border-left: 2px solid var(--accent);
@@ -833,7 +845,8 @@ h4 {
 }
 
 /* =========================================================
-   Homelab spec sheet (homelab.html)
+   Homelab spec sheet (homelab.html) — builds on the cards,
+   chips, status pills and buttons defined above
    ========================================================= */
 
 .lab-hero {
@@ -841,34 +854,10 @@ h4 {
 }
 
 .back-link {
-  margin: 0 0 1.5rem;
-  font-size: 0.9375rem;
+  margin: 0 0 1.4rem;
 }
 
-.back-link a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.25rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.back-link a span {
-  text-decoration: underline;
-  text-underline-offset: 0.16em;
-}
-
-.back-link a:hover i {
-  transform: translateX(-3px);
-}
-
-.back-link i {
-  font-size: 0.85em;
-  transition: transform 0.2s ease;
-}
-
-.lab-eyebrow {
+.lab-hero .meta {
   margin-bottom: 0.9rem;
 }
 
@@ -884,20 +873,12 @@ h4 {
   margin-top: 1.6rem;
 }
 
-/* Sits beside a status pill, so it matches the pill metrics */
+/* A chip that carries an icon, sitting beside a status pill */
 .lab-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin: 0;
-  padding: 0.2rem 0.8rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: var(--surface-2);
-  color: var(--ink-muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
 }
 
 .lab-badge i {
@@ -914,10 +895,6 @@ h4 {
   padding: 2rem;
 }
 
-.lab-plate:hover {
-  transform: none;
-}
-
 .lab-sigil {
   justify-self: center;
 }
@@ -929,13 +906,8 @@ h4 {
 }
 
 .lab-kicker {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-muted);
 }
 
 .lab-host {
@@ -943,13 +915,6 @@ h4 {
   font-size: 1.75rem;
   letter-spacing: -0.02em;
   color: var(--accent-ink);
-}
-
-.lab-host-note {
-  max-width: 52ch;
-  margin: 0.35rem 0 0;
-  color: var(--ink-muted);
-  font-size: 0.9375rem;
 }
 
 /* 1px gaps over a ruled background draw the cell grid */
@@ -967,15 +932,6 @@ h4 {
 .lab-vital {
   padding: 0.7rem 0.9rem;
   background: var(--surface-2);
-}
-
-.lab-vital dt {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
 }
 
 .lab-vital dd {
@@ -997,14 +953,9 @@ h4 {
 }
 
 .spec-legend {
-  display: flex;
-  flex-wrap: wrap;
   gap: 0.35rem 1.1rem;
   margin: 0;
-  padding: 0;
-  list-style: none;
   font-size: 0.8125rem;
-  color: var(--ink-muted);
 }
 
 .spec-legend li {
@@ -1013,23 +964,10 @@ h4 {
   gap: 0.45rem;
 }
 
-.legend-dot {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-}
-
-.legend-dot.is-ok {
-  background: var(--ok-ink);
-}
-
-.legend-dot.is-wip {
-  background: var(--wip-ink);
-}
-
-.legend-dot.is-plan {
-  background: var(--rule-strong);
-}
+/* The dots inherit their fill from the item's colour */
+.legend-ok { color: var(--ok-ink); }
+.legend-wip { color: var(--wip-ink); }
+.legend-plan { color: var(--rule-strong); }
 
 .spec-ctrls {
   display: flex;
@@ -1040,19 +978,13 @@ h4 {
   min-height: 2.25rem;
   padding: 0.3rem 0.85rem;
   font-size: 0.8125rem;
-  cursor: pointer;
-  font-family: inherit;
 }
 
 /* --- System accordions --- */
 
 .sys {
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  background: var(--surface);
-  box-shadow: var(--shadow);
+  padding: 0;
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .sys + .sys {
@@ -1080,19 +1012,19 @@ h4 {
   transition: background-color 0.2s ease;
 }
 
-.sys-head:hover {
+.sys-head:hover,
+.sys.is-open .sys-head {
   background: var(--surface-2);
+}
+
+.sys.is-open .sys-head {
+  border-bottom: 1px solid var(--rule);
 }
 
 /* The card clips its corners, so the ring has to sit inside */
 .sys-head:focus-visible {
   outline-offset: -3px;
   border-radius: 0;
-}
-
-.sys.is-open .sys-head {
-  background: var(--surface-2);
-  border-bottom: 1px solid var(--rule);
 }
 
 .sys-code {
@@ -1115,10 +1047,6 @@ h4 {
 
 .sys-title {
   display: block;
-  font-size: 1.0625rem;
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
 }
 
 .sys-sub {
@@ -1135,7 +1063,6 @@ h4 {
 }
 
 .sys-caret {
-  flex: none;
   color: var(--ink-muted);
   transition: transform 0.25s ease;
 }
@@ -1155,6 +1082,7 @@ h4 {
   grid-template-rows: 1fr;
 }
 
+/* Padding has to sit inside the clip, or it props the closed panel open */
 .sys-body-inner {
   overflow: hidden;
 }
@@ -1175,15 +1103,20 @@ h4 {
   border-top: 1px solid var(--rule);
 }
 
-.spec th {
-  width: 12rem;
-  padding: 0.7rem 1.25rem 0.7rem 0;
+/* Mono label, shared by the vitals grid and the spec rows */
+.spec th,
+.lab-vital dt {
   font-family: var(--mono);
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-muted);
+}
+
+.spec th {
+  width: 12rem;
+  padding: 0.7rem 1.25rem 0.7rem 0;
   text-align: left;
   vertical-align: top;
   white-space: nowrap;
@@ -1207,34 +1140,19 @@ h4 {
   line-height: 1.55;
 }
 
+/* A status pill shrunk to sit inline in a spec row */
 .flag {
-  display: inline-block;
   margin-left: 0.4rem;
   padding: 0.05rem 0.55rem;
-  border: 1px solid var(--wip-border);
-  border-radius: 999px;
-  background: var(--wip-bg);
-  color: var(--wip-ink);
   font-family: var(--mono);
   font-size: 0.7rem;
   font-weight: 600;
-  white-space: nowrap;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-.flag-ok {
-  border-color: var(--ok-border);
-  background: var(--ok-bg);
-  color: var(--ok-ink);
-}
-
-/* Shares the accent edge of .project-part */
 .note {
   margin: 1.2rem 0 0;
-  padding: 0.9rem 1.1rem;
-  border: 1px solid var(--rule);
-  border-left: 2px solid var(--accent);
-  border-radius: var(--radius-sm);
-  background: var(--surface-2);
   color: var(--ink-muted);
   font-size: 0.9375rem;
 }
@@ -1288,16 +1206,6 @@ h4 {
   border: 1px dashed var(--rule-strong);
 }
 
-.slot-amt {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--ink-muted);
-  white-space: nowrap;
-}
-
-.lab-expansion:hover {
-  transform: none;
-}
 
 /* =========================================================
    Contact
@@ -1311,7 +1219,11 @@ h4 {
   padding: 2rem;
 }
 
-.card-contact:hover {
+/* Cards that are read, not clicked, stay put on hover */
+.card-contact:hover,
+.lab-plate:hover,
+.lab-expansion:hover,
+.sys:hover {
   transform: none;
 }
 
@@ -1537,7 +1449,7 @@ h4 {
     font-size: 0.95rem;
   }
 
-  .card,
+  .card:not(.sys),
   .card-project,
   .card-contact {
     padding: 1.25rem;
@@ -1614,16 +1526,12 @@ h4 {
 
   .card:hover,
   .btn:hover,
-  .nav-icon:hover,
-  .back-link a:hover i {
+  .nav-icon:hover {
     transform: none;
   }
 }
 
-/* =========================================================
-   Print — the spec sheet is meant to survive a paper copy
-   ========================================================= */
-
+/* The spec sheet is meant to survive a paper copy */
 @media print {
   .navbar,
   .skip-link,
@@ -1633,8 +1541,7 @@ h4 {
     display: none;
   }
 
-  .card,
-  .sys {
+  .card {
     box-shadow: none;
     break-inside: avoid;
   }

@@ -176,32 +176,22 @@
   if (!systems.length) return;
 
   function setOpen(sys, open) {
-    var head = sys.querySelector('.sys-head');
-
     sys.classList.toggle('is-open', open);
-    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    sys.querySelector('.sys-head').setAttribute('aria-expanded', open);
+  }
+
+  function setAll(open) {
+    return function () {
+      systems.forEach(function (sys) { setOpen(sys, open); });
+    };
   }
 
   systems.forEach(function (sys) {
-    var head = sys.querySelector('.sys-head');
-    if (!head) return;
-
-    head.addEventListener('click', function () {
+    sys.querySelector('.sys-head').addEventListener('click', function () {
       setOpen(sys, !sys.classList.contains('is-open'));
     });
   });
 
-  function setAll(open) {
-    return function () {
-      systems.forEach(function (sys) {
-        setOpen(sys, open);
-      });
-    };
-  }
-
-  var expand = document.getElementById('spec-expand');
-  var collapse = document.getElementById('spec-collapse');
-
-  if (expand) expand.addEventListener('click', setAll(true));
-  if (collapse) collapse.addEventListener('click', setAll(false));
+  document.getElementById('spec-expand').addEventListener('click', setAll(true));
+  document.getElementById('spec-collapse').addEventListener('click', setAll(false));
 })();

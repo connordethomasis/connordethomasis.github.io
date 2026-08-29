@@ -86,7 +86,7 @@
                     </a>
                 </p>
 
-                <p class="meta lab-eyebrow">Personal project <span aria-hidden="true">•</span> July 2026 – Present</p>
+                <p class="meta">Personal project <span aria-hidden="true">•</span> July 2026 – Present</p>
 
                 <h1 id="lab-heading">Detection Engineering Homelab</h1>
                 <p class="tagline">Emulate <span aria-hidden="true">→</span> observe <span aria-hidden="true">→</span> detect <span aria-hidden="true">→</span> tune</p>
@@ -136,10 +136,10 @@
                         </svg>
                     </div>
 
-                    <div class="lab-ident">
-                        <p class="lab-kicker">asset <span aria-hidden="true">//</span> detection-engineering-lab</p>
+                    <div>
+                        <p class="meta lab-kicker">asset <span aria-hidden="true">//</span> detection-engineering-lab</p>
                         <h3 class="lab-host">atlas</h3>
-                        <p class="lab-host-note">
+                        <p class="card-org">
                             A single-socket workstation running as a headless hypervisor node, administered
                             over SSH and the Proxmox web UI.
                         </p>
@@ -166,10 +166,10 @@
                 </div>
 
                 <div class="spec-bar">
-                    <ul class="spec-legend">
-                        <li><span class="legend-dot is-ok" aria-hidden="true"></span>Operational</li>
-                        <li><span class="legend-dot is-wip" aria-hidden="true"></span>Needs attention / headroom</li>
-                        <li><span class="legend-dot is-plan" aria-hidden="true"></span>Planned</li>
+                    <ul class="hero-facts spec-legend">
+                        <li><span class="dot legend-ok" aria-hidden="true"></span>Operational</li>
+                        <li><span class="dot legend-wip" aria-hidden="true"></span>Needs attention / headroom</li>
+                        <li><span class="dot legend-plan" aria-hidden="true"></span>Planned</li>
                     </ul>
 
                     <div class="spec-ctrls">
@@ -179,291 +179,147 @@
                 </div>
 
                 <!-- Compute -->
-                <article class="sys is-open">
+                <article class="card sys is-open">
                     <button class="sys-head" type="button" aria-expanded="true" aria-controls="sys-cpu">
                         <span class="sys-code" aria-hidden="true">CPU</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Compute</span>
-                            <span class="sys-sub">14 cores / 28 threads · single socket</span>
-                        </span>
+                        <span><span class="sys-title">Compute</span><span class="sys-sub">14 cores / 28 threads · single socket</span></span>
                         <span class="sys-stat">
                             <span class="status status-done"><span class="dot" aria-hidden="true"></span>Online</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-cpu">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Processor</th>
-                                    <td>
-                                        <span class="mono">Intel Xeon E5-2680 v4</span>
-                                        <small>Broadwell-EP, 14C/28T, 2.4 GHz base / 3.3 GHz turbo, 35 MB L3, 120 W TDP.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Socket / board</th>
-                                    <td>
-                                        <span class="mono">LGA 2011-3</span> · Dell Precision T5810
-                                        <small>Single-socket workstation chassis.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Firmware</th>
-                                    <td>
-                                        A34 — BIOS update required for the v4 stepping <span class="flag flag-ok">pre-install task</span>
-                                        <small>Flashed before relying on the CPU. There is no BIOS flashback on this board, so a
-                                            POST-capable CPU has to be seated first.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Host display</th>
-                                    <td>
-                                        Basic PCIe VGA for console and recovery
-                                        <small>The Xeon has no integrated graphics, so the node runs headless over SSH and the web UI.</small>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Processor</th><td><span class="mono">Intel Xeon E5-2680 v4</span>
+                                <small>Broadwell-EP, 14C/28T, 2.4 GHz base / 3.3 GHz turbo, 35 MB L3, 120 W TDP.</small></td></tr>
+                            <tr><th scope="row">Socket / board</th><td><span class="mono">LGA 2011-3</span> · Dell Precision T5810
+                                <small>Single-socket workstation chassis.</small></td></tr>
+                            <tr><th scope="row">Firmware</th><td>A34 — BIOS update required for the v4 stepping <span class="status status-done flag">pre-install task</span>
+                                <small>Flashed before relying on the CPU. There is no BIOS flashback on this board, so a
+                                    POST-capable CPU has to be seated first.</small></td></tr>
+                            <tr><th scope="row">Host display</th><td>Basic PCIe VGA for console and recovery
+                                <small>The Xeon has no integrated graphics, so the node runs headless over SSH and the web UI.</small></td></tr>
                         </table>
                     </div></div></div>
                 </article>
 
                 <!-- Memory -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-mem">
                         <span class="sys-code" aria-hidden="true">MEM</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Memory</span>
-                            <span class="sys-sub">24 GB ECC now · large headroom</span>
-                        </span>
+                        <span><span class="sys-title">Memory</span><span class="sys-sub">24 GB ECC now · large headroom</span></span>
                         <span class="sys-stat">
                             <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Headroom</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-mem">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Installed</th>
-                                    <td>
-                                        <span class="mono">24 GB DDR4 ECC RDIMM</span> — 6 × 4 GB, a mix of 2133 MHz and 2400 MHz
-                                        <small>The mixed kit clocks down to 1866 MHz across the board.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Slots</th>
-                                    <td>
-                                        8 DIMM slots · 6 channels filled
-                                        <small>The current fill leaves room to move to one DIMM per channel for best speed.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Upgrade path</th>
-                                    <td>
-                                        8 × 16 GB → 128 GB, filling every channel <span class="flag">planned</span>
-                                        <small>Enough to run the full stack simultaneously. Preferably all 2400 MHz modules, with an
-                                            overnight memtest86+ pass before trusting used sticks.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">ZFS ARC cap</th>
-                                    <td>
-                                        <span class="mono">zfs_arc_max = 4 GB</span> <span class="flag flag-ok">set</span>
-                                        <small>Essential at 24 GB, so ZFS caching cannot starve the guests.</small>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Installed</th><td><span class="mono">24 GB DDR4 ECC RDIMM</span> — 6 × 4 GB, a mix of 2133 MHz and 2400 MHz
+                                <small>The mixed kit clocks down to 1866 MHz across the board.</small></td></tr>
+                            <tr><th scope="row">Slots</th><td>8 DIMM slots · 6 channels filled
+                                <small>The current fill leaves room to move to one DIMM per channel for best speed.</small></td></tr>
+                            <tr><th scope="row">Upgrade path</th><td>8 × 16 GB → 128 GB, filling every channel <span class="status status-wip flag">planned</span>
+                                <small>Enough to run the full stack simultaneously. Preferably all 2400 MHz modules, with an
+                                    overnight memtest86+ pass before trusting used sticks.</small></td></tr>
+                            <tr><th scope="row">ZFS ARC cap</th><td><span class="mono">zfs_arc_max = 4 GB</span> <span class="status status-done flag">set</span>
+                                <small>Essential at 24 GB, so ZFS caching cannot starve the guests.</small></td></tr>
                         </table>
                     </div></div></div>
                 </article>
 
                 <!-- Storage -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-sto">
                         <span class="sys-code" aria-hidden="true">STO</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Storage</span>
-                            <span class="sys-sub">LVM-thin SSD + ZFS mirror (gaia)</span>
-                        </span>
+                        <span><span class="sys-title">Storage</span><span class="sys-sub">LVM-thin SSD + ZFS mirror (gaia)</span></span>
                         <span class="sys-stat">
                             <span class="status status-done"><span class="dot" aria-hidden="true"></span>Online</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-sto">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Boot / VM disks</th>
-                                    <td>
-                                        <span class="mono">256 GB SATA SSD</span> · LVM-thin
-                                        <small>Volume group <span class="mono">pve</span> → <span class="mono">pve/root</span> for the OS and
-                                            <span class="mono">pve/data</span> for guest disks. The tightest constraint in the build — thin-pool
-                                            headroom needs watching.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Bulk pool</th>
-                                    <td>
-                                        <span class="mono">gaia</span> — ZFS mirror, 2 × 2 TB
-                                        <small>WD RE4 (WD2003FYYS) at 3 Gb/s, with datasets <span class="mono">gaia/backup</span> and
-                                            <span class="mono">gaia/iso</span>. A mirror survives a dead disk, not an <span class="mono">rm</span> —
-                                            snapshots are not backups.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Pool geometry</th>
-                                    <td>
-                                        <span class="mono">ashift=12 · compression=lz4 · atime=off</span> <span class="flag flag-ok">set</span>
-                                        <small>ashift is permanent, and 12 keeps future 4Kn replacements drop-in.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Data integrity</th>
-                                    <td>
-                                        Monthly scrub · SMART long test · ZED email alerts <span class="flag">verify</span>
-                                        <small>Given the age of the drives, confirm the scrub cron covers gaia and that a degraded-pool
-                                            email actually sends.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Highest-value upgrade</th>
-                                    <td>
-                                        1 TB NVMe on a PCIe adapter <span class="flag">planned</span>
-                                        <small>Boot stays on the SATA SSD and guest disks move to NVMe — the single best ~$80 in the build.</small>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Boot / VM disks</th><td><span class="mono">256 GB SATA SSD</span> · LVM-thin
+                                <small>Volume group <span class="mono">pve</span> → <span class="mono">pve/root</span> for the OS and
+                                    <span class="mono">pve/data</span> for guest disks. The tightest constraint in the build — thin-pool
+                                    headroom needs watching.</small></td></tr>
+                            <tr><th scope="row">Bulk pool</th><td><span class="mono">gaia</span> — ZFS mirror, 2 × 2 TB
+                                <small>WD RE4 (WD2003FYYS) at 3 Gb/s, with datasets <span class="mono">gaia/backup</span> and
+                                    <span class="mono">gaia/iso</span>. A mirror survives a dead disk, not an <span class="mono">rm</span> —
+                                    snapshots are not backups.</small></td></tr>
+                            <tr><th scope="row">Pool geometry</th><td><span class="mono">ashift=12 · compression=lz4 · atime=off</span> <span class="status status-done flag">set</span>
+                                <small>ashift is permanent, and 12 keeps future 4Kn replacements drop-in.</small></td></tr>
+                            <tr><th scope="row">Data integrity</th><td>Monthly scrub · SMART long test · ZED email alerts <span class="status status-wip flag">verify</span>
+                                <small>Given the age of the drives, confirm the scrub cron covers gaia and that a degraded-pool
+                                    email actually sends.</small></td></tr>
+                            <tr><th scope="row">Highest-value upgrade</th><td>1 TB NVMe on a PCIe adapter <span class="status status-wip flag">planned</span>
+                                <small>Boot stays on the SATA SSD and guest disks move to NVMe — the single best ~$80 in the build.</small></td></tr>
                         </table>
                     </div></div></div>
                 </article>
 
                 <!-- Power -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-pwr">
                         <span class="sys-code" aria-hidden="true">PWR</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Power &amp; protection</span>
-                            <span class="sys-sub">490 W UPS · NUT graceful shutdown</span>
-                        </span>
+                        <span><span class="sys-title">Power &amp; protection</span><span class="sys-sub">490 W UPS · NUT graceful shutdown</span></span>
                         <span class="sys-stat">
                             <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Load test pending</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-pwr">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">PSU</th>
-                                    <td><span class="mono">Dell 685 W</span> (DP/N 0VYRCP) · active PFC</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">UPS</th>
-                                    <td>
-                                        <span class="mono">ION F10 · 850 VA / 490 W</span> · simulated sine
-                                        <small>The vendor states APFC support, and sizing is comfortable at roughly 17% load at idle
-                                            with the tower alone on battery.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Open question</th>
-                                    <td>
-                                        Stepped waveform against an active-PFC PSU <span class="flag">test under load</span>
-                                        <small>Transfer-test at real load with stress-ng, both directions, 5–10 cycles. A clean idle
-                                            transfer is not proof; PFC stages fault hardest when busy.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Auto shutdown</th>
-                                    <td>
-                                        NUT on Proxmox over the USB link
-                                        <small>Likely <span class="mono">nutdrv_qx</span> (Voltronic/Megatec class). Trigger on remaining
-                                            runtime of about 8 minutes rather than battery percentage, which these units report poorly.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">On battery</th>
-                                    <td>
-                                        Tower only <span class="flag flag-ok">current</span>
-                                        <small>The monitor sits on surge-only. Guest shutdown order is set so the domain controller
-                                            flushes before the host powers off.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Planned on battery</th>
-                                    <td>
-                                        Modem · router · switch <span class="flag">planned</span>
-                                        <small>Roughly 20–30 W combined. Adding them keeps the network up through brief outages and
-                                            barely dents runtime.</small>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">PSU</th><td><span class="mono">Dell 685 W</span> (DP/N 0VYRCP) · active PFC</td></tr>
+                            <tr><th scope="row">UPS</th><td><span class="mono">ION F10 · 850 VA / 490 W</span> · simulated sine
+                                <small>The vendor states APFC support, and sizing is comfortable at roughly 17% load at idle
+                                    with the tower alone on battery.</small></td></tr>
+                            <tr><th scope="row">Open question</th><td>Stepped waveform against an active-PFC PSU <span class="status status-wip flag">test under load</span>
+                                <small>Transfer-test at real load with stress-ng, both directions, 5–10 cycles. A clean idle
+                                    transfer is not proof; PFC stages fault hardest when busy.</small></td></tr>
+                            <tr><th scope="row">Auto shutdown</th><td>NUT on Proxmox over the USB link
+                                <small>Likely <span class="mono">nutdrv_qx</span> (Voltronic/Megatec class). Trigger on remaining
+                                    runtime of about 8 minutes rather than battery percentage, which these units report poorly.</small></td></tr>
+                            <tr><th scope="row">On battery</th><td>Tower only <span class="status status-done flag">current</span>
+                                <small>The monitor sits on surge-only. Guest shutdown order is set so the domain controller
+                                    flushes before the host powers off.</small></td></tr>
+                            <tr><th scope="row">Planned on battery</th><td>Modem · router · switch <span class="status status-wip flag">planned</span>
+                                <small>Roughly 20–30 W combined. Adding them keeps the network up through brief outages and
+                                    barely dents runtime.</small></td></tr>
                         </table>
                     </div></div></div>
                 </article>
 
                 <!-- Virtualisation -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-virt">
                         <span class="sys-code" aria-hidden="true">VIRT</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Virtualisation stack</span>
-                            <span class="sys-sub">Proxmox VE · VMs and LXC</span>
-                        </span>
+                        <span><span class="sys-title">Virtualisation stack</span><span class="sys-sub">Proxmox VE · VMs and LXC</span></span>
                         <span class="sys-stat">
                             <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Building</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-virt">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Domain controller</th>
-                                    <td>
-                                        Windows Server · <span class="mono">lab.local</span>
-                                        <small>AD DS and DNS — the attack surface for the detection loop.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Domain client</th>
-                                    <td>Windows, joined to <span class="mono">lab.local</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Attacker</th>
-                                    <td>
-                                        Kali Linux
-                                        <small>Impacket, Rubeus and hashcat for technique emulation.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">SIEM</th>
-                                    <td>
-                                        Wazuh single-node
-                                        <small>Around 8 GB and 4 cores is realistic; the indexer heap is the real RAM cost. ISM
-                                            retention set early.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Targets</th>
-                                    <td>OWASP Juice Shop · DVWA</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Containers</th>
-                                    <td>
-                                        Pi-hole and supporting services in LXC
-                                        <small>Unprivileged LXC over VMs to save RAM. Community scripts are fine for plumbing; the
-                                            security path is hand-built.</small>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Domain controller</th><td>Windows Server · <span class="mono">lab.local</span>
+                                <small>AD DS and DNS — the attack surface for the detection loop.</small></td></tr>
+                            <tr><th scope="row">Domain client</th><td>Windows, joined to <span class="mono">lab.local</span></td></tr>
+                            <tr><th scope="row">Attacker</th><td>Kali Linux
+                                <small>Impacket, Rubeus and hashcat for technique emulation.</small></td></tr>
+                            <tr><th scope="row">SIEM</th><td>Wazuh single-node
+                                <small>Around 8 GB and 4 cores is realistic; the indexer heap is the real RAM cost. ISM
+                                    retention set early.</small></td></tr>
+                            <tr><th scope="row">Targets</th><td>OWASP Juice Shop · DVWA</td></tr>
+                            <tr><th scope="row">Containers</th><td>Pi-hole and supporting services in LXC
+                                <small>Unprivileged LXC over VMs to save RAM. Community scripts are fine for plumbing; the
+                                    security path is hand-built.</small></td></tr>
                         </table>
 
                         <p class="note">
@@ -474,105 +330,52 @@
                 </article>
 
                 <!-- Network -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-net">
                         <span class="sys-code" aria-hidden="true">NET</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Networking &amp; segmentation</span>
-                            <span class="sys-sub">pfSense · isolated bridges</span>
-                        </span>
+                        <span><span class="sys-title">Networking &amp; segmentation</span><span class="sys-sub">pfSense · isolated bridges</span></span>
                         <span class="sys-stat">
                             <span class="status status-wip"><span class="dot" aria-hidden="true"></span>1 NIC</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-net">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Physical</th>
-                                    <td>
-                                        1 × onboard gigabit
-                                        <small>The home router stays the real internet path; pfSense is a lab-internal gateway, not the
-                                            house router.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Gateway</th>
-                                    <td>
-                                        pfSense on an isolated bridge (<span class="mono">vmbr1</span>, no physical port)
-                                        <small>NATs the lab outbound for updates.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Segments</th>
-                                    <td>
-                                        Attacker LAN · Victim LAN
-                                        <small>Rules permit attacker → victim and deny lab → home LAN.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Isolation gate</th>
-                                    <td>Verify the lab cannot route to the home LAN <span class="flag">before targets go live</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Upgrade path</th>
-                                    <td>Intel i350-T4 NIC · managed switch for VLANs <span class="flag">planned</span></td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Physical</th><td>1 × onboard gigabit
+                                <small>The home router stays the real internet path; pfSense is a lab-internal gateway, not the
+                                    house router.</small></td></tr>
+                            <tr><th scope="row">Gateway</th><td>pfSense on an isolated bridge (<span class="mono">vmbr1</span>, no physical port)
+                                <small>NATs the lab outbound for updates.</small></td></tr>
+                            <tr><th scope="row">Segments</th><td>Attacker LAN · Victim LAN
+                                <small>Rules permit attacker → victim and deny lab → home LAN.</small></td></tr>
+                            <tr><th scope="row">Isolation gate</th><td>Verify the lab cannot route to the home LAN <span class="status status-wip flag">before targets go live</span></td></tr>
+                            <tr><th scope="row">Upgrade path</th><td>Intel i350-T4 NIC · managed switch for VLANs <span class="status status-wip flag">planned</span></td></tr>
                         </table>
                     </div></div></div>
                 </article>
 
                 <!-- Detection -->
-                <article class="sys">
+                <article class="card sys">
                     <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-sec">
                         <span class="sys-code" aria-hidden="true">SEC</span>
-                        <span class="sys-text">
-                            <span class="sys-title">Detection engineering</span>
-                            <span class="sys-sub">Wazuh · Sysmon · MITRE ATT&amp;CK</span>
-                        </span>
+                        <span><span class="sys-title">Detection engineering</span><span class="sys-sub">Wazuh · Sysmon · MITRE ATT&amp;CK</span></span>
                         <span class="sys-stat">
                             <span class="status status-wip"><span class="dot" aria-hidden="true"></span>0 of 4 tuned</span>
-                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                            <i class="fa-solid fa-chevron-right sys-caret" aria-hidden="true"></i>
                         </span>
                     </button>
 
                     <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-sec">
                         <table class="spec">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">Telemetry</th>
-                                    <td>
-                                        Sysmon (SwiftOnSecurity baseline) → Wazuh agent → indexer
-                                        <small>Sysmon-fed detection is far stronger than raw Windows logs.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Framework</th>
-                                    <td>MITRE ATT&amp;CK — every technique mapped by ID</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Kerberoasting</th>
-                                    <td>
-                                        <span class="mono">T1558.003</span> · rule 100200 plus a volumetric rule <span class="flag">planned</span>
-                                        <small>The 4769 RC4 tell, with machine-account noise tuned out and an AES-evasion backstop.</small>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">DCSync</th>
-                                    <td><span class="mono">T1003.006</span> <span class="flag">planned</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">LSASS access</th>
-                                    <td><span class="mono">T1003.001</span> <span class="flag">planned</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Password spray</th>
-                                    <td><span class="mono">T1110.003</span> <span class="flag">planned</span></td>
-                                </tr>
-                            </tbody>
+                            <tr><th scope="row">Telemetry</th><td>Sysmon (SwiftOnSecurity baseline) → Wazuh agent → indexer
+                                <small>Sysmon-fed detection is far stronger than raw Windows logs.</small></td></tr>
+                            <tr><th scope="row">Framework</th><td>MITRE ATT&amp;CK — every technique mapped by ID</td></tr>
+                            <tr><th scope="row">Kerberoasting</th><td><span class="mono">T1558.003</span> · rule 100200 plus a volumetric rule <span class="status status-wip flag">planned</span>
+                                <small>The 4769 RC4 tell, with machine-account noise tuned out and an AES-evasion backstop.</small></td></tr>
+                            <tr><th scope="row">DCSync</th><td><span class="mono">T1003.006</span> <span class="status status-wip flag">planned</span></td></tr>
+                            <tr><th scope="row">LSASS access</th><td><span class="mono">T1003.001</span> <span class="status status-wip flag">planned</span></td></tr>
+                            <tr><th scope="row">Password spray</th><td><span class="mono">T1110.003</span> <span class="status status-wip flag">planned</span></td></tr>
                         </table>
 
                         <p class="note">
@@ -608,7 +411,7 @@
                                 <span class="pip pip-used"></span><span class="pip pip-used"></span><span class="pip pip-used"></span>
                                 <span class="pip pip-free"></span><span class="pip pip-free"></span>
                             </span>
-                            <span class="slot-amt">6 of 8 used · to 128 GB</span>
+                            <span class="meta">6 of 8 used · to 128 GB</span>
                         </li>
                         <li class="slot">
                             <span class="slot-label">PCIe slots</span>
@@ -616,14 +419,14 @@
                                 <span class="pip pip-free"></span><span class="pip pip-free"></span>
                                 <span class="pip pip-free"></span><span class="pip pip-free"></span>
                             </span>
-                            <span class="slot-amt">0 of 4 used · NVMe, NIC, GPU</span>
+                            <span class="meta">0 of 4 used · NVMe, NIC, GPU</span>
                         </li>
                         <li class="slot">
                             <span class="slot-label">Drive bays</span>
                             <span class="meter" aria-hidden="true">
                                 <span class="pip pip-used"></span><span class="pip pip-used"></span>
                             </span>
-                            <span class="slot-amt">2 of 2 used · pool full</span>
+                            <span class="meta">2 of 2 used · pool full</span>
                         </li>
                         <li class="slot">
                             <span class="slot-label">UPS load</span>
@@ -632,7 +435,7 @@
                                 <span class="pip pip-free"></span><span class="pip pip-free"></span><span class="pip pip-free"></span>
                                 <span class="pip pip-free"></span>
                             </span>
-                            <span class="slot-amt">~17% · tower only</span>
+                            <span class="meta">~17% · tower only</span>
                         </li>
                     </ul>
 
