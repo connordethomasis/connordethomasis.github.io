@@ -5,7 +5,7 @@
   var menu = document.getElementById('nav-menu');
   var toggle = document.getElementById('nav-toggle');
   var toggleIcon = toggle && toggle.querySelector('i');
-  var compact = window.matchMedia('(max-width: 62rem)');
+  var compact = window.matchMedia('(max-width: 68rem)'); // matches the nav breakpoint in style.css
 
   // --- Collapsible menu (small screens) ---------------------------------
 
@@ -165,4 +165,43 @@
   });
 
   markCurrent();
+})();
+
+/* ---------------------------------------------------------------------
+   Spec sheet accordions — homelab page only
+   --------------------------------------------------------------------- */
+
+(function () {
+  var systems = Array.prototype.slice.call(document.querySelectorAll('.sys'));
+  if (!systems.length) return;
+
+  function setOpen(sys, open) {
+    var head = sys.querySelector('.sys-head');
+
+    sys.classList.toggle('is-open', open);
+    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  systems.forEach(function (sys) {
+    var head = sys.querySelector('.sys-head');
+    if (!head) return;
+
+    head.addEventListener('click', function () {
+      setOpen(sys, !sys.classList.contains('is-open'));
+    });
+  });
+
+  function setAll(open) {
+    return function () {
+      systems.forEach(function (sys) {
+        setOpen(sys, open);
+      });
+    };
+  }
+
+  var expand = document.getElementById('spec-expand');
+  var collapse = document.getElementById('spec-collapse');
+
+  if (expand) expand.addEventListener('click', setAll(true));
+  if (collapse) collapse.addEventListener('click', setAll(false));
 })();

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Detection Engineering Homelab — Connor De Thomasis</title>
+        <meta name="description" content="Spec sheet for atlas, a from-scratch detection engineering lab built on Proxmox VE: compute, storage, power, virtualisation, network segmentation and detection coverage.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#17191d">
+
+        <!-- Social preview -->
+        <meta property="og:type" content="article">
+        <meta property="og:title" content="Detection Engineering Homelab — atlas">
+        <meta property="og:description" content="A from-scratch detection engineering lab: emulate, observe, detect, tune. Full spec sheet for the host, storage, network segmentation and detection coverage.">
+        <meta property="og:url" content="https://connordethomasis.github.io/homelab.html">
+
+        <!-- Inline mark, avoids a favicon request -->
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2317191d'/><text x='32' y='44' font-family='Manrope,Arial,sans-serif' font-size='34' font-weight='700' fill='%23ccb844' text-anchor='middle'>C</text></svg>">
+
+        <!-- Typeface -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+        <!-- Styling -->
+        <link rel="stylesheet" href="style.css">
+        <!-- Icon Container -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    </head>
+
+    <body>
+
+        <a class="skip-link" href="#main">Skip to main content</a>
+
+        <!-- Navigation Bar -->
+
+        <nav class="navbar" aria-label="Primary">
+            <div class="nav-inner">
+                <a class="logo" href="index.html">
+                    <span class="logo-mark" aria-hidden="true">C</span>
+                    <span class="logo-name">Connor De Thomasis</span>
+                </a>
+
+                <button class="nav-toggle" type="button" id="nav-toggle" aria-controls="nav-menu" aria-expanded="false">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    <span class="visually-hidden">Menu</span>
+                </button>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-links">
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="index.html#education">Education</a></li>
+                        <li><a href="index.html#experience">Experience</a></li>
+                        <li><a href="index.html#skills">Skills</a></li>
+                        <li><a href="index.html#projects">Projects</a></li>
+                        <li><a class="is-current" href="homelab.html" aria-current="page">Homelab</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+
+                    <div class="nav-actions">
+                        <a class="nav-icon nav-icon-resume" href="assets/connor-de-thomasis-resume.pdf" download
+                           title="Download résumé (PDF)" aria-label="Download résumé (PDF)">
+                            <i class="fa-solid fa-file-arrow-down" aria-hidden="true"></i>
+                        </a>
+                        <a class="nav-icon" href="https://github.com/connordethomasis" target="_blank" rel="noopener"
+                           title="GitHub" aria-label="GitHub profile (opens in a new tab)">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a class="nav-icon" href="https://www.linkedin.com/in/connor-de-thomasis/" target="_blank" rel="noopener"
+                           title="LinkedIn" aria-label="LinkedIn profile (opens in a new tab)">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="page" id="main" tabindex="-1">
+
+            <!-- Intro -->
+
+            <section class="lab-hero" aria-labelledby="lab-heading">
+                <p class="back-link">
+                    <a href="index.html#projects">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        <span>Back to projects</span>
+                    </a>
+                </p>
+
+                <p class="meta lab-eyebrow">Personal project <span aria-hidden="true">•</span> July 2026 – Present</p>
+
+                <h1 id="lab-heading">Detection Engineering Homelab</h1>
+                <p class="tagline">Emulate <span aria-hidden="true">→</span> observe <span aria-hidden="true">→</span> detect <span aria-hidden="true">→</span> tune</p>
+                <p class="subtagline">atlas <span aria-hidden="true">·</span> Dell Precision T5810 <span aria-hidden="true">·</span> Proxmox VE</p>
+
+                <p class="lede">
+                    A detection engineering lab built from scratch: a segmented environment with a Windows
+                    Active Directory domain, a Wazuh single-node SIEM and deliberately vulnerable targets,
+                    with pfSense enforcing isolation between the lab and the host network. Attack activity is
+                    emulated from a Kali VM and mapped to MITRE ATT&amp;CK, driving custom detection rules and
+                    tuning against real telemetry.
+                </p>
+                <p class="lede">
+                    This page is the running spec sheet for the build — what is online, what needs attention
+                    and what the next upgrade buys.
+                </p>
+
+                <div class="lab-badges">
+                    <p class="status status-done"><span class="pulse" aria-hidden="true"></span>Operational</p>
+                    <p class="lab-badge">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        Isolated lab <span aria-hidden="true">·</span> no inbound exposure <span aria-hidden="true">·</span> no production data
+                    </p>
+                </div>
+            </section>
+
+            <!-- Host -->
+
+            <section id="host" class="section" aria-labelledby="host-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">01</span>
+                    <h2 id="host-heading">Host</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="card lab-plate">
+                    <div class="lab-sigil" aria-hidden="true">
+                        <svg viewBox="0 0 120 120" fill="none" stroke="var(--accent-ink)" stroke-width="1">
+                            <circle cx="60" cy="60" r="46" stroke="var(--rule-strong)"/>
+                            <ellipse cx="60" cy="60" rx="46" ry="17"/>
+                            <ellipse cx="60" cy="60" rx="46" ry="33" stroke-opacity=".45"/>
+                            <ellipse cx="60" cy="60" rx="17" ry="46"/>
+                            <ellipse cx="60" cy="60" rx="33" ry="46" stroke-opacity=".45"/>
+                            <line x1="14" y1="60" x2="106" y2="60" stroke="var(--rule-strong)"/>
+                            <line x1="60" y1="14" x2="60" y2="106" stroke="var(--rule-strong)"/>
+                            <circle cx="60" cy="60" r="2.6" fill="var(--accent-ink)" stroke="none"/>
+                        </svg>
+                    </div>
+
+                    <div class="lab-ident">
+                        <p class="lab-kicker">asset <span aria-hidden="true">//</span> detection-engineering-lab</p>
+                        <h3 class="lab-host">atlas</h3>
+                        <p class="lab-host-note">
+                            A single-socket workstation running as a headless hypervisor node, administered
+                            over SSH and the Proxmox web UI.
+                        </p>
+
+                        <dl class="lab-vitals">
+                            <div class="lab-vital"><dt>Hypervisor</dt><dd>Proxmox VE</dd></div>
+                            <div class="lab-vital"><dt>CPU</dt><dd>Xeon E5-2680 v4</dd></div>
+                            <div class="lab-vital"><dt>Memory</dt><dd>24 GB ECC · 6 of 8 slots</dd></div>
+                            <div class="lab-vital"><dt>Storage</dt><dd>256 GB SSD + 2 × 2 TB ZFS mirror</dd></div>
+                            <div class="lab-vital"><dt>Power</dt><dd>490 W UPS · NUT</dd></div>
+                            <div class="lab-vital"><dt>Domain</dt><dd>lab.local</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Systems -->
+
+            <section id="systems" class="section" aria-labelledby="systems-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">02</span>
+                    <h2 id="systems-heading">Systems</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="spec-bar">
+                    <ul class="spec-legend">
+                        <li><span class="legend-dot is-ok" aria-hidden="true"></span>Operational</li>
+                        <li><span class="legend-dot is-wip" aria-hidden="true"></span>Needs attention / headroom</li>
+                        <li><span class="legend-dot is-plan" aria-hidden="true"></span>Planned</li>
+                    </ul>
+
+                    <div class="spec-ctrls">
+                        <button class="btn btn-ghost btn-mini" type="button" id="spec-expand">Expand all</button>
+                        <button class="btn btn-ghost btn-mini" type="button" id="spec-collapse">Collapse all</button>
+                    </div>
+                </div>
+
+                <!-- Compute -->
+                <article class="sys is-open">
+                    <button class="sys-head" type="button" aria-expanded="true" aria-controls="sys-cpu">
+                        <span class="sys-code" aria-hidden="true">CPU</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Compute</span>
+                            <span class="sys-sub">14 cores / 28 threads · single socket</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-done"><span class="dot" aria-hidden="true"></span>Online</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-cpu">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Processor</th>
+                                    <td>
+                                        <span class="mono">Intel Xeon E5-2680 v4</span>
+                                        <small>Broadwell-EP, 14C/28T, 2.4 GHz base / 3.3 GHz turbo, 35 MB L3, 120 W TDP.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Socket / board</th>
+                                    <td>
+                                        <span class="mono">LGA 2011-3</span> · Dell Precision T5810
+                                        <small>Single-socket workstation chassis.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Firmware</th>
+                                    <td>
+                                        A34 — BIOS update required for the v4 stepping <span class="flag flag-ok">pre-install task</span>
+                                        <small>Flashed before relying on the CPU. There is no BIOS flashback on this board, so a
+                                            POST-capable CPU has to be seated first.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Host display</th>
+                                    <td>
+                                        Basic PCIe VGA for console and recovery
+                                        <small>The Xeon has no integrated graphics, so the node runs headless over SSH and the web UI.</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></div></div>
+                </article>
+
+                <!-- Memory -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-mem">
+                        <span class="sys-code" aria-hidden="true">MEM</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Memory</span>
+                            <span class="sys-sub">24 GB ECC now · large headroom</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Headroom</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-mem">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Installed</th>
+                                    <td>
+                                        <span class="mono">24 GB DDR4 ECC RDIMM</span> — 6 × 4 GB, a mix of 2133 MHz and 2400 MHz
+                                        <small>The mixed kit clocks down to 1866 MHz across the board.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Slots</th>
+                                    <td>
+                                        8 DIMM slots · 6 channels filled
+                                        <small>The current fill leaves room to move to one DIMM per channel for best speed.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Upgrade path</th>
+                                    <td>
+                                        8 × 16 GB → 128 GB, filling every channel <span class="flag">planned</span>
+                                        <small>Enough to run the full stack simultaneously. Preferably all 2400 MHz modules, with an
+                                            overnight memtest86+ pass before trusting used sticks.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ZFS ARC cap</th>
+                                    <td>
+                                        <span class="mono">zfs_arc_max = 4 GB</span> <span class="flag flag-ok">set</span>
+                                        <small>Essential at 24 GB, so ZFS caching cannot starve the guests.</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></div></div>
+                </article>
+
+                <!-- Storage -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-sto">
+                        <span class="sys-code" aria-hidden="true">STO</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Storage</span>
+                            <span class="sys-sub">LVM-thin SSD + ZFS mirror (gaia)</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-done"><span class="dot" aria-hidden="true"></span>Online</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-sto">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Boot / VM disks</th>
+                                    <td>
+                                        <span class="mono">256 GB SATA SSD</span> · LVM-thin
+                                        <small>Volume group <span class="mono">pve</span> → <span class="mono">pve/root</span> for the OS and
+                                            <span class="mono">pve/data</span> for guest disks. The tightest constraint in the build — thin-pool
+                                            headroom needs watching.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Bulk pool</th>
+                                    <td>
+                                        <span class="mono">gaia</span> — ZFS mirror, 2 × 2 TB
+                                        <small>WD RE4 (WD2003FYYS) at 3 Gb/s, with datasets <span class="mono">gaia/backup</span> and
+                                            <span class="mono">gaia/iso</span>. A mirror survives a dead disk, not an <span class="mono">rm</span> —
+                                            snapshots are not backups.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Pool geometry</th>
+                                    <td>
+                                        <span class="mono">ashift=12 · compression=lz4 · atime=off</span> <span class="flag flag-ok">set</span>
+                                        <small>ashift is permanent, and 12 keeps future 4Kn replacements drop-in.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Data integrity</th>
+                                    <td>
+                                        Monthly scrub · SMART long test · ZED email alerts <span class="flag">verify</span>
+                                        <small>Given the age of the drives, confirm the scrub cron covers gaia and that a degraded-pool
+                                            email actually sends.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Highest-value upgrade</th>
+                                    <td>
+                                        1 TB NVMe on a PCIe adapter <span class="flag">planned</span>
+                                        <small>Boot stays on the SATA SSD and guest disks move to NVMe — the single best ~$80 in the build.</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></div></div>
+                </article>
+
+                <!-- Power -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-pwr">
+                        <span class="sys-code" aria-hidden="true">PWR</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Power &amp; protection</span>
+                            <span class="sys-sub">490 W UPS · NUT graceful shutdown</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Load test pending</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-pwr">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">PSU</th>
+                                    <td><span class="mono">Dell 685 W</span> (DP/N 0VYRCP) · active PFC</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">UPS</th>
+                                    <td>
+                                        <span class="mono">ION F10 · 850 VA / 490 W</span> · simulated sine
+                                        <small>The vendor states APFC support, and sizing is comfortable at roughly 17% load at idle
+                                            with the tower alone on battery.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Open question</th>
+                                    <td>
+                                        Stepped waveform against an active-PFC PSU <span class="flag">test under load</span>
+                                        <small>Transfer-test at real load with stress-ng, both directions, 5–10 cycles. A clean idle
+                                            transfer is not proof; PFC stages fault hardest when busy.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Auto shutdown</th>
+                                    <td>
+                                        NUT on Proxmox over the USB link
+                                        <small>Likely <span class="mono">nutdrv_qx</span> (Voltronic/Megatec class). Trigger on remaining
+                                            runtime of about 8 minutes rather than battery percentage, which these units report poorly.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">On battery</th>
+                                    <td>
+                                        Tower only <span class="flag flag-ok">current</span>
+                                        <small>The monitor sits on surge-only. Guest shutdown order is set so the domain controller
+                                            flushes before the host powers off.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Planned on battery</th>
+                                    <td>
+                                        Modem · router · switch <span class="flag">planned</span>
+                                        <small>Roughly 20–30 W combined. Adding them keeps the network up through brief outages and
+                                            barely dents runtime.</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></div></div>
+                </article>
+
+                <!-- Virtualisation -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-virt">
+                        <span class="sys-code" aria-hidden="true">VIRT</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Virtualisation stack</span>
+                            <span class="sys-sub">Proxmox VE · VMs and LXC</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-wip"><span class="dot" aria-hidden="true"></span>Building</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-virt">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Domain controller</th>
+                                    <td>
+                                        Windows Server · <span class="mono">lab.local</span>
+                                        <small>AD DS and DNS — the attack surface for the detection loop.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Domain client</th>
+                                    <td>Windows, joined to <span class="mono">lab.local</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Attacker</th>
+                                    <td>
+                                        Kali Linux
+                                        <small>Impacket, Rubeus and hashcat for technique emulation.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">SIEM</th>
+                                    <td>
+                                        Wazuh single-node
+                                        <small>Around 8 GB and 4 cores is realistic; the indexer heap is the real RAM cost. ISM
+                                            retention set early.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Targets</th>
+                                    <td>OWASP Juice Shop · DVWA</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Containers</th>
+                                    <td>
+                                        Pi-hole and supporting services in LXC
+                                        <small>Unprivileged LXC over VMs to save RAM. Community scripts are fine for plumbing; the
+                                            security path is hand-built.</small>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="note">
+                            At 24 GB the lab runs a slice at a time, snapshotting or stopping idle guests. At 128 GB the
+                            whole stack runs at once.
+                        </p>
+                    </div></div></div>
+                </article>
+
+                <!-- Network -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-net">
+                        <span class="sys-code" aria-hidden="true">NET</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Networking &amp; segmentation</span>
+                            <span class="sys-sub">pfSense · isolated bridges</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-wip"><span class="dot" aria-hidden="true"></span>1 NIC</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-net">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Physical</th>
+                                    <td>
+                                        1 × onboard gigabit
+                                        <small>The home router stays the real internet path; pfSense is a lab-internal gateway, not the
+                                            house router.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Gateway</th>
+                                    <td>
+                                        pfSense on an isolated bridge (<span class="mono">vmbr1</span>, no physical port)
+                                        <small>NATs the lab outbound for updates.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Segments</th>
+                                    <td>
+                                        Attacker LAN · Victim LAN
+                                        <small>Rules permit attacker → victim and deny lab → home LAN.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Isolation gate</th>
+                                    <td>Verify the lab cannot route to the home LAN <span class="flag">before targets go live</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Upgrade path</th>
+                                    <td>Intel i350-T4 NIC · managed switch for VLANs <span class="flag">planned</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div></div></div>
+                </article>
+
+                <!-- Detection -->
+                <article class="sys">
+                    <button class="sys-head" type="button" aria-expanded="false" aria-controls="sys-sec">
+                        <span class="sys-code" aria-hidden="true">SEC</span>
+                        <span class="sys-text">
+                            <span class="sys-title">Detection engineering</span>
+                            <span class="sys-sub">Wazuh · Sysmon · MITRE ATT&amp;CK</span>
+                        </span>
+                        <span class="sys-stat">
+                            <span class="status status-wip"><span class="dot" aria-hidden="true"></span>0 of 4 tuned</span>
+                            <svg class="sys-caret" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4l4 4-4 4"/></svg>
+                        </span>
+                    </button>
+
+                    <div class="sys-body-wrap"><div class="sys-body-inner"><div class="sys-body" id="sys-sec">
+                        <table class="spec">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Telemetry</th>
+                                    <td>
+                                        Sysmon (SwiftOnSecurity baseline) → Wazuh agent → indexer
+                                        <small>Sysmon-fed detection is far stronger than raw Windows logs.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Framework</th>
+                                    <td>MITRE ATT&amp;CK — every technique mapped by ID</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Kerberoasting</th>
+                                    <td>
+                                        <span class="mono">T1558.003</span> · rule 100200 plus a volumetric rule <span class="flag">planned</span>
+                                        <small>The 4769 RC4 tell, with machine-account noise tuned out and an AES-evasion backstop.</small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">DCSync</th>
+                                    <td><span class="mono">T1003.006</span> <span class="flag">planned</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">LSASS access</th>
+                                    <td><span class="mono">T1003.001</span> <span class="flag">planned</span></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Password spray</th>
+                                    <td><span class="mono">T1110.003</span> <span class="flag">planned</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p class="note">
+                            The loop — emulate, find the telemetry, write the rule, then <b>tune against legitimate
+                            activity</b> — is the point of the lab. The tuning is what signals real skill.
+                        </p>
+                    </div></div></div>
+                </article>
+            </section>
+
+            <!-- Expansion -->
+
+            <section id="expansion" class="section" aria-labelledby="expansion-heading">
+                <div class="section-head">
+                    <span class="section-index" aria-hidden="true">03</span>
+                    <h2 id="expansion-heading">Expansion headroom</h2>
+                    <span class="section-rule" aria-hidden="true"></span>
+                </div>
+
+                <div class="card lab-expansion">
+                    <div class="card-top">
+                        <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-layer-group"></i></span>
+                        <p class="status status-plan"><span class="dot" aria-hidden="true"></span>Capacity</p>
+                    </div>
+
+                    <h3>What is still free in the chassis</h3>
+
+                    <ul class="slots">
+                        <li class="slot">
+                            <span class="slot-label">DIMM slots</span>
+                            <span class="meter" aria-hidden="true">
+                                <span class="pip pip-used"></span><span class="pip pip-used"></span><span class="pip pip-used"></span>
+                                <span class="pip pip-used"></span><span class="pip pip-used"></span><span class="pip pip-used"></span>
+                                <span class="pip pip-free"></span><span class="pip pip-free"></span>
+                            </span>
+                            <span class="slot-amt">6 of 8 used · to 128 GB</span>
+                        </li>
+                        <li class="slot">
+                            <span class="slot-label">PCIe slots</span>
+                            <span class="meter" aria-hidden="true">
+                                <span class="pip pip-free"></span><span class="pip pip-free"></span>
+                                <span class="pip pip-free"></span><span class="pip pip-free"></span>
+                            </span>
+                            <span class="slot-amt">0 of 4 used · NVMe, NIC, GPU</span>
+                        </li>
+                        <li class="slot">
+                            <span class="slot-label">Drive bays</span>
+                            <span class="meter" aria-hidden="true">
+                                <span class="pip pip-used"></span><span class="pip pip-used"></span>
+                            </span>
+                            <span class="slot-amt">2 of 2 used · pool full</span>
+                        </li>
+                        <li class="slot">
+                            <span class="slot-label">UPS load</span>
+                            <span class="meter" aria-hidden="true">
+                                <span class="pip pip-used"></span><span class="pip pip-free"></span><span class="pip pip-free"></span>
+                                <span class="pip pip-free"></span><span class="pip pip-free"></span><span class="pip pip-free"></span>
+                                <span class="pip pip-free"></span>
+                            </span>
+                            <span class="slot-amt">~17% · tower only</span>
+                        </li>
+                    </ul>
+
+                    <p class="note">
+                        Priority order: <b>NVMe</b> to relieve the SSD bottleneck, <b>RAM to 128 GB</b> to run the whole
+                        stack at once, a <b>second NIC and managed switch</b> for a cleaner VLAN topology, then a
+                        <b>GPU</b> for an LLM lab at up to 24 GB VRAM.
+                    </p>
+
+                    <ul class="chips chips-tech">
+                        <li>Proxmox VE</li>
+                        <li>Windows Active Directory</li>
+                        <li>Wazuh SIEM</li>
+                        <li>pfSense</li>
+                        <li>Kali Linux</li>
+                        <li>MITRE ATT&amp;CK</li>
+                        <li>ZFS</li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p>
+                    Connor De Thomasis
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:connor.dethomasis@outlook.com">connor.dethomasis@outlook.com</a>
+                </p>
+                <p class="footer-note">Living document — last updated 29 Aug 2026.</p>
+            </div>
+        </footer>
+
+        <script src="script.js" defer></script>
+
+    </body>
+</html>
